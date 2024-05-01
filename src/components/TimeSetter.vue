@@ -25,4 +25,8 @@ div {
 button {
   @apply bg-red-700 p-2 rounded-md ml-3;
 }
+
+input[type="datetime-local"] {
+  @apply bg-sky-900 px-2 py-1;
+}
 </style>
