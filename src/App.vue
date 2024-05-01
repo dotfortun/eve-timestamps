@@ -37,26 +37,37 @@ watch(timeModel, () => {
 </script>
 
 <template>
-  <div>
-    <div class="header">
-      <h1>Once More With Timestamps</h1>
-    </div>
-    <div class="controls">
-      <DiscordTS :time="time" :counter="counter" />
-      <TimeSetter v-model="timeModel" @reset="timeModel = null" />
-    </div>
-    <div class="timezones">
-      <Time title="System Time" :time="time" tz="system" :counter="counter" />
-      <template v-for="zone of timezones">
-        <Time
-          :title="zone.title"
-          :time="time"
-          :tz="zone.tz"
-          :counter="counter"
-        />
-      </template>
-    </div>
+  <div class="header">
+    <h1>Once More With Timestamps</h1>
   </div>
+  <div class="controls">
+    <DiscordTS :time="time" :counter="counter" />
+    <TimeSetter v-model="timeModel" @reset="timeModel = null" />
+  </div>
+  <div class="timezones">
+    <Time title="System Time" :time="time" tz="system" :counter="counter" />
+    <template v-for="zone of timezones">
+      <Time :title="zone.title" :time="time" :tz="zone.tz" :counter="counter" />
+    </template>
+  </div>
+  <footer>
+    <div>
+      <p>Created by <a href="https://github.com/dotfortun">dotfortun</a>.</p>
+      <p>
+        <small>
+          ISK donations to Peter Dostoevsky will be turned into explosions
+          somehow.
+        </small>
+      </p>
+    </div>
+    <div>
+      <p>
+        <a href="https://github.com/dotfortun/eve-timestamps/issues">
+          Found a bug? Tell us here!
+        </a>
+      </p>
+    </div>
+  </footer>
 </template>
 
 <style scoped>
@@ -74,5 +85,14 @@ div.timezones {
 
 div.controls {
   @apply container mx-auto mb-3 flex flex-1 flex-row justify-between;
+}
+
+footer {
+  @apply flex flex-row content-center justify-between p-4 text-slate-400;
+  @apply max-lg:flex-col max-lg:items-center max-lg:text-center;
+}
+
+footer a {
+  @apply text-cyan-400 decoration-solid;
 }
 </style>
