@@ -4,24 +4,56 @@ import { useInterval } from "@vueuse/core";
 import { DateTime, Zone } from "luxon";
 
 import Time from "./components/Time.vue";
+import DiscordTS from "./components/DiscordTS.vue";
+import TimeSetter from "./components/TimeSetter.vue";
 
-const timezones = ref(["utc", "America/New_York", "America/Los_Angeles"]);
+const timezones = ref([
+  { title: "GMT", tz: "utc" },
+  { title: "US Eastern / New York", tz: "America/New_York" },
+  { title: "US Central / Chicago", tz: "America/Chicago" },
+  { title: "US Mountain / Denver", tz: "America/Boise" },
+  { title: "US Pacific / Los Angeles", tz: "America/Los_Angeles" },
+  { title: "EU Western / London", tz: "Europe/London" },
+  { title: "EU Central / Germany", tz: "Europe/Berlin" },
+  { title: "EU Eastern / Türkiye", tz: "Europe/Istanbul" },
+  { title: "Russia / Moscow", tz: "Europe/Moscow" },
+  { title: "China / Shanghai", tz: "Asia/Shanghai" },
+  { title: "Australia / Sydney", tz: "Australia/Sydney" },
+]);
 
 const counter = useInterval(1000);
 const time = ref(DateTime.now());
+const timeModel = defineModel();
 
 watch(counter, () => {
-  time.value = DateTime.now();
+  if (!timeModel.value) {
+    time.value = DateTime.now();
+  }
+});
+
+watch(timeModel, () => {
+  time.value = DateTime.fromISO(timeModel.value);
 });
 </script>
 
 <template>
   <div>
-    <h1>Once More With Timestamps</h1>
+    <div class="header">
+      <h1>Once More With Timestamps</h1>
+    </div>
+    <div class="controls">
+      <DiscordTS :time="time" :counter="counter" />
+      <TimeSetter v-model="timeModel" @reset="timeModel = null" />
+    </div>
     <div class="timezones">
       <Time title="System Time" :time="time" tz="system" :counter="counter" />
-      <template v-for="tz of timezones">
-        <Time :time="time" :tz="tz" :counter="counter" />
+      <template v-for="zone of timezones">
+        <Time
+          :title="zone.title"
+          :time="time"
+          :tz="zone.tz"
+          :counter="counter"
+        />
       </template>
     </div>
   </div>
@@ -32,7 +64,15 @@ div {
   @apply prose prose-invert max-w-none;
 }
 
+div.header {
+  @apply container mx-auto mb-3;
+}
+
 div.timezones {
-  @apply grid grid-cols-1 lg:grid-cols-4 gap-2;
+  @apply container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-2 mt-2;
+}
+
+div.controls {
+  @apply container mx-auto mb-3 flex flex-1 flex-row justify-between;
 }
 </style>
