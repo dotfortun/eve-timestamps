@@ -56,7 +56,7 @@ const selected = ref(formats.value[0]);
 <template>
   <div>
     <label>
-      Discord Timestamp Format:
+      Discord Timestamp:
       <select class="text-slate-900" v-model="selected">
         <template v-for="fmt of formats">
           <option :value="fmt">{{ fmt.name }}</option>

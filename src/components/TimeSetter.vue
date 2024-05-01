@@ -26,7 +26,7 @@ div {
 }
 
 button {
-  @apply bg-red-700 p-2 rounded-md ml-3;
+  @apply bg-red-700 p-2 rounded-md ml-3 h-min;
 }
 
 input[type="datetime-local"] {
