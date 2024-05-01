@@ -24,6 +24,7 @@ const timezones = ref([
 const counter = useInterval(1000);
 const time = ref(DateTime.now());
 const timeModel = defineModel();
+const diceroll = ref(Math.random());
 
 watch(counter, () => {
   if (!timeModel.value) {
@@ -55,8 +56,13 @@ watch(timeModel, () => {
       <p>Created by <a href="https://github.com/dotfortun">dotfortun</a>.</p>
       <p>
         <small>
-          ISK donations to Peter Dostoevsky will be turned into explosions
-          somehow.
+          {{
+            diceroll < 0.05
+              ? `Yes, this is basically just Nakamura Labs' Time
+          tool but with Discord timestamps.`
+              : `ISK donations to Peter
+          Dostoevsky will be turned into explosions somehow.`
+          }}
         </small>
       </p>
     </div>
