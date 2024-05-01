@@ -60,8 +60,7 @@ watch(timeModel, () => {
             diceroll < 0.05
               ? `Yes, this is basically just Nakamura Labs' Time
           tool but with Discord timestamps.`
-              : `ISK donations to Peter
-          Dostoevsky will be turned into explosions somehow.`
+              : `Donations to Peter Dostoevsky in Eve Online will be turned into lossmails.`
           }}
         </small>
       </p>
