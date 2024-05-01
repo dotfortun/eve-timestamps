@@ -78,7 +78,7 @@ const selected = ref(formats.value[0]);
 <style scoped>
 select {
   @apply mr-2;
-  @apply bg-sky-900 text-slate-200 px-2 py-1;
+  @apply bg-sky-900 text-slate-200 px-2 py-1 rounded-md;
 }
 
 button {

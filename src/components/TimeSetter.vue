@@ -30,6 +30,6 @@ button {
 }
 
 input[type="datetime-local"] {
-  @apply bg-sky-900 px-2 py-1;
+  @apply bg-sky-900 px-2 py-1 rounded-md;
 }
 </style>
