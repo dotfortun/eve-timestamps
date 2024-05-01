@@ -1,30 +1,38 @@
 <script setup>
-import HelloWorld from "./components/HelloWorld.vue";
+import { ref, watch } from "vue";
+import { useInterval } from "@vueuse/core";
+import { DateTime, Zone } from "luxon";
+
+import Time from "./components/Time.vue";
+
+const timezones = ref(["utc", "America/New_York", "America/Los_Angeles"]);
+
+const counter = useInterval(1000);
+const time = ref(DateTime.now());
+
+watch(counter, () => {
+  time.value = DateTime.now();
+});
 </script>
 
 <template>
   <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <h1>Once More With Timestamps</h1>
+    <div class="timezones">
+      <Time title="System Time" :time="time" tz="system" :counter="counter" />
+      <template v-for="tz of timezones">
+        <Time :time="time" :tz="tz" :counter="counter" />
+      </template>
+    </div>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+div {
+  @apply prose prose-invert max-w-none;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+div.timezones {
+  @apply grid grid-cols-1 lg:grid-cols-4 gap-2;
 }
 </style>

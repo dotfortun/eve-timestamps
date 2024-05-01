@@ -9,6 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tailwindcss/typography": "^0.5.13",
+    "@vueuse/core": "^10.9.0",
+    "luxon": "^3.4.4",
+    "oh-vue-icons": "^1.0.0-rc3",
     "vue": "^3.4.21"
   },
   "devDependencies": {
