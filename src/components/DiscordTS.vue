@@ -55,11 +55,14 @@ const selected = ref(formats.value[0]);
 
 <template>
   <div>
-    <select class="text-slate-900" v-model="selected">
-      <template v-for="fmt of formats">
-        <option :value="fmt">{{ fmt.name }}</option>
-      </template>
-    </select>
+    <label>
+      Discord Timestamp Format:
+      <select class="text-slate-900" v-model="selected">
+        <template v-for="fmt of formats">
+          <option :value="fmt">{{ fmt.name }}</option>
+        </template>
+      </select>
+    </label>
     <button
       @click="
         copy(timestamp(time, selected.value));
@@ -75,6 +78,7 @@ const selected = ref(formats.value[0]);
 <style scoped>
 select {
   @apply mr-2;
+  @apply bg-sky-900 text-slate-200 px-2 py-1;
 }
 
 button {

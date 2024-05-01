@@ -8,11 +8,14 @@ const emit = defineEmits(["update:modelValue", "reset"]);
 
 <template>
   <div>
-    <input
-      type="datetime-local"
-      :value="modelValue"
-      @input="emit('update:modelValue', $event.target.value)"
-    />
+    <label>
+      Set Time:
+      <input
+        type="datetime-local"
+        :value="modelValue"
+        @input="emit('update:modelValue', $event.target.value)"
+      />
+    </label>
     <button @click="emit('reset')">Reset</button>
   </div>
 </template>
