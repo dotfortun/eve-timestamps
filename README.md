@@ -1,7 +1,22 @@
-# Vue 3 + Vite
+# Eve Timestamps
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+The repo for https://time.dotlag.space.
 
-## Recommended IDE Setup
+This is basically [time.nakamuralabs.com](https://time.nakamura-labs.com/) but with added Discord timestamps.
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+## Documentation
+
+Clone the project into your working directory, then run `npm install --save-dev` and `npm run dev`.
+
+## Deployment
+
+To deploy this project run `npm run build` and then serve `./dist` with your preferred server.
+
+This also works with a 1-button deployment on the free tier of Vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdotfortun%2Feve-timestamps)
+
+
+## Authors
+
+- [@dotfortun](https://www.github.com/dotfortun)
