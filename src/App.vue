@@ -123,4 +123,8 @@ footer {
 footer a {
   @apply text-cyan-400 decoration-solid;
 }
+
+footer ul {
+  @apply pl-0;
+}
 </style>
