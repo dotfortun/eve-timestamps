@@ -94,7 +94,7 @@ div.controls {
 }
 
 footer {
-  @apply container;
+  @apply container mx-auto mb-3;
   @apply flex flex-row content-center justify-between p-4 text-slate-400;
   @apply max-lg:flex-col max-lg:items-center max-lg:text-center;
 }
