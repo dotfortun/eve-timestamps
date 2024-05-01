@@ -56,12 +56,14 @@ watch(timeModel, () => {
       <p>Created by <a href="https://github.com/dotfortun">dotfortun</a>.</p>
       <p>
         <small>
-          {{
-            diceroll < 0.05
-              ? `Yes, this is basically just Nakamura Labs' Time
-          tool but with Discord timestamps.`
-              : `Donations to Peter Dostoevsky in Eve Online will be turned into lossmails.`
-          }}
+          <template v-if="diceroll < 0.05">
+            Yes, this is basically just Nakamura Labs' Time tool but with
+            Discord timestamps.
+          </template>
+          <template v-else>
+            Donations to Peter Dostoevsky in Eve Online will be turned into
+            lossmails.
+          </template>
         </small>
       </p>
     </div>
