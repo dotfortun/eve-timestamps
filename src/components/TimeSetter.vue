@@ -1,35 +1,85 @@
-<script setup>
+<script setup lang="ts">
 import { DateTime } from "luxon";
 import { ref } from "vue";
 
-const { modelValue } = defineProps(["modelValue"]);
-const emit = defineEmits(["update:modelValue", "reset"]);
+const { modelValue } = defineProps<{
+  modelValue: DateTime | null;
+}>();
+
+const emit = defineEmits<{
+  (e: "update:modelValue", value: string): void;
+  (e: "reset"): void;
+}>();
+
+const offset = ref({
+  day: 0,
+  hour: 0,
+  minute: 0,
+});
 </script>
 
 <template>
-  <div>
+  <div class="offset">
+    In:
+    <label><input type="number" v-model="offset.day" /> days </label>
+    <label><input type="number" v-model="offset.hour" /> hours </label>
+    <label><input type="number" v-model="offset.minute" /> minutes </label>
+    <button
+      class="set"
+      @click="emit('update:modelValue', DateTime.now().plus(offset).toISO())"
+    >
+      Set
+    </button>
+  </div>
+
+  <div class="picker">
     <label>
       Set Time:
-      <input
-        type="datetime-local"
-        :value="modelValue"
-        @input="emit('update:modelValue', $event.target.value)"
-      />
+      <input type="datetime-local" :value="modelValue" />
     </label>
-    <button @click="emit('reset')">Reset</button>
+    <button
+      class="set"
+      @click="
+        emit('update:modelValue', ($event.target as HTMLInputElement).value)
+      "
+    >
+      Set
+    </button>
   </div>
+  <button
+    class="reset"
+    @click="
+      emit('reset');
+      offset = {
+        day: 0,
+        hour: 0,
+        minute: 0,
+      };
+    "
+  >
+    Reset
+  </button>
 </template>
 
 <style scoped>
-div {
-  @apply flex text-slate-800;
+div.offset,
+div.picker {
+  @apply my-2;
 }
 
-button {
+button.reset {
   @apply bg-red-700 p-2 rounded-md ml-3 h-min;
 }
 
-input[type="datetime-local"] {
+button.set {
+  @apply ml-2;
+}
+
+input {
   @apply bg-sky-900 px-2 py-1 rounded-md;
+}
+
+input[type="number"] {
+  max-width: 3rem;
 }
 </style>

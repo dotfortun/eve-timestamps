@@ -111,7 +111,8 @@ div.timezones {
 }
 
 div.controls {
-  @apply container mx-auto mb-3 flex flex-1 flex-row justify-between;
+  @apply container mx-auto mb-3 flex flex-1 flex-col justify-between;
+  @apply items-center lg:flex-row;
 }
 
 footer {

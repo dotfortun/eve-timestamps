@@ -6,3 +6,7 @@ body {
   @apply prose prose-invert max-w-none;
   @apply text-slate-200 bg-sky-950 px-5 py-3;
 }
+
+button.set {
+  @apply bg-teal-800 p-2 rounded-md;
+}

@@ -64,6 +64,7 @@ const selected = ref(formats.value[0]);
       </select>
     </label>
     <button
+      class="set"
       @click="
         copy(timestamp(time, selected.value));
         start();
@@ -79,9 +80,5 @@ const selected = ref(formats.value[0]);
 select {
   @apply mr-2;
   @apply bg-sky-900 text-slate-200 px-2 py-1 rounded-md;
-}
-
-button {
-  @apply bg-teal-800 p-2 rounded-md;
 }
 </style>
