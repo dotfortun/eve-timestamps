@@ -7,7 +7,7 @@ const { modelValue } = defineProps<{
 }>();
 
 const emit = defineEmits<{
-  (e: "update:modelValue", value: string): void;
+  (e: "update:modelValue", value: string | null): void;
   (e: "reset"): void;
 }>();
 
@@ -16,6 +16,8 @@ const offset = ref({
   hour: 0,
   minute: 0,
 });
+
+const setTime = ref("");
 </script>
 
 <template>
@@ -35,16 +37,13 @@ const offset = ref({
   <div class="picker">
     <label>
       Set Time:
-      <input type="datetime-local" :value="modelValue" />
+      <input
+        type="datetime-local"
+        :value="setTime"
+        @input="setTime = ($event.target as HTMLInputElement).value"
+      />
     </label>
-    <button
-      class="set"
-      @click="
-        emit('update:modelValue', ($event.target as HTMLInputElement).value)
-      "
-    >
-      Set
-    </button>
+    <button class="set" @click="emit('update:modelValue', setTime)">Set</button>
   </div>
   <button
     class="reset"
