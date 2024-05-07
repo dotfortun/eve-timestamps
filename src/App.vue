@@ -43,6 +43,8 @@ watch(timeModel, () => {
   </div>
   <div class="controls">
     <DiscordTS :time="time" :counter="counter" />
+  </div>
+  <div class="controls">
     <TimeSetter v-model="timeModel" @reset="timeModel = null" />
   </div>
   <div class="timezones">
