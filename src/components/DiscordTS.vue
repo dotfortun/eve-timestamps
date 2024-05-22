@@ -55,14 +55,11 @@ const selected = ref(formats.value[0]);
 
 <template>
   <div>
-    <label>
-      Discord Timestamp:
-      <select class="text-slate-900" v-model="selected" v-once>
-        <template v-for="fmt of formats">
-          <option :value="fmt">{{ fmt.name }}</option>
-        </template>
-      </select>
-    </label>
+    <select class="text-slate-900" v-model="selected" v-once>
+      <template v-for="fmt of formats">
+        <option :value="fmt">{{ fmt.name }}</option>
+      </template>
+    </select>
     <button
       class="set"
       @click="
@@ -71,7 +68,15 @@ const selected = ref(formats.value[0]);
       "
       :data-counter="counter"
     >
-      {{ ready ? "Copy" : "Copied" }}
+      {{ ready ? "Copy Discord Tag" : "Tag Copied" }}
+    </button>
+    <button
+      class="set ml-2"
+      @click="
+        copy(`https://time.dotlag.space/?t=${Math.floor(time.toSeconds())}`)
+      "
+    >
+      Share Time
     </button>
   </div>
 </template>

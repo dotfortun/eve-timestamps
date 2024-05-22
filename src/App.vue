@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch } from "vue";
-import { useInterval } from "@vueuse/core";
+import { useInterval, useUrlSearchParams } from "@vueuse/core";
 import { DateTime, Zone } from "luxon";
 
 import Time from "./components/Time.vue";
@@ -21,6 +21,8 @@ const timezones = ref([
   { title: "Australia / Sydney", tz: "Australia/Sydney" },
 ]);
 
+const { t } = useUrlSearchParams("history");
+
 const counter = useInterval(1000);
 const time = ref(DateTime.now());
 const timeModel = defineModel();
@@ -29,20 +31,27 @@ const diceroll = ref(Math.random());
 watch(counter, () => {
   if (!timeModel.value) {
     time.value = DateTime.now();
+  } else {
+    time.value = DateTime.fromISO(timeModel.value);
   }
 });
 
-watch(timeModel, () => {
-  time.value = DateTime.fromISO(timeModel.value);
-});
+console.log(t);
+
+if (t !== undefined) {
+  console.log(DateTime.fromSeconds(parseInt(t)).toISO());
+  timeModel.value = DateTime.fromSeconds(parseInt(t)).toISO();
+}
 </script>
 
 <template>
   <div class="header">
     <h1>Once More With Timestamps</h1>
   </div>
-  <div class="controls">
+  <div class="share">
     <DiscordTS :time="time" :counter="counter" />
+  </div>
+  <div class="controls">
     <TimeSetter v-model="timeModel" @reset="timeModel = null" />
   </div>
   <div class="timezones">
@@ -103,16 +112,20 @@ div {
 }
 
 div.header {
-  @apply container mx-auto mb-3;
+  @apply container mx-auto mb-3 flex justify-center lg:justify-start;
 }
 
 div.timezones {
-  @apply container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-2 mt-2;
+  @apply container mx-auto grid grid-cols-1 lg:grid-cols-3 gap-2 mt-2 mb-3;
 }
 
 div.controls {
-  @apply container mx-auto mb-3 flex flex-1 flex-col justify-between;
-  @apply items-center lg:flex-row;
+  @apply container mx-auto mb-3 flex flex-grow-0 flex-shrink flex-col justify-around;
+  @apply items-center xl:flex-row gap-1 flex-wrap;
+}
+
+div.share {
+  @apply container mx-auto mb-3 flex justify-around xl:justify-start;
 }
 
 footer {

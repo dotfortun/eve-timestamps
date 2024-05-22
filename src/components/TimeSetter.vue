@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { DateTime } from "luxon";
 import { ref } from "vue";
+import { useBrowserLocation } from "@vueuse/core";
 
 const { modelValue } = defineProps<{
   modelValue: DateTime | null;
 }>();
+const location = useBrowserLocation();
 
 const emit = defineEmits<{
   (e: "update:modelValue", value: string | null): void;
@@ -22,7 +24,7 @@ const setTime = ref("");
 
 <template>
   <div class="offset">
-    In:
+    <span>In: </span>
     <label><input type="number" v-model="offset.day" /> days </label>
     <label><input type="number" v-model="offset.hour" /> hours </label>
     <label><input type="number" v-model="offset.minute" /> minutes </label>
@@ -43,8 +45,15 @@ const setTime = ref("");
         @input="setTime = ($event.target as HTMLInputElement).value"
       />
     </label>
-    <button class="set" @click="emit('update:modelValue', setTime)">Set</button>
+    <button
+      class="set"
+      @click="emit('update:modelValue', setTime)"
+      :disabled="!setTime"
+    >
+      Set
+    </button>
   </div>
+
   <button
     class="reset"
     @click="
@@ -54,6 +63,7 @@ const setTime = ref("");
         hour: 0,
         minute: 0,
       };
+      setTime = '';
     "
   >
     Reset
@@ -64,18 +74,15 @@ const setTime = ref("");
 div.offset,
 div.picker {
   @apply my-2;
-}
-
-button.reset {
-  @apply bg-red-700 p-2 rounded-md ml-3 h-min;
+  @apply flex flex-1 flex-col lg:flex-row items-center;
 }
 
 button.set {
-  @apply ml-2;
+  @apply ml-2 my-2;
 }
 
 input {
-  @apply bg-sky-900 px-2 py-1 rounded-md;
+  @apply bg-sky-900 px-2 py-1 rounded-md mb-2;
 }
 
 input[type="number"] {
