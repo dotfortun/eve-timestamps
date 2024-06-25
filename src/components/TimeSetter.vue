@@ -24,10 +24,10 @@ const setTime = ref("");
 
 <template>
   <div class="offset">
-    <span>In: </span>
-    <label><input type="number" v-model="offset.day" /> days </label>
-    <label><input type="number" v-model="offset.hour" /> hours </label>
-    <label><input type="number" v-model="offset.minute" /> minutes </label>
+    <span>In:</span>
+    <label><input type="number" v-model="offset.day" /> days</label>
+    <label><input type="number" v-model="offset.hour" /> hours</label>
+    <label><input type="number" v-model="offset.minute" /> minutes</label>
     <button
       class="set"
       @click="emit('update:modelValue', DateTime.now().plus(offset).toISO())"
@@ -74,7 +74,7 @@ const setTime = ref("");
 div.offset,
 div.picker {
   @apply my-2;
-  @apply flex flex-1 flex-col lg:flex-row items-center;
+  @apply flex flex-1 flex-col lg:flex-row items-baseline gap-1;
 }
 
 button.set {
