@@ -63,7 +63,7 @@ if (t !== undefined) {
       <Time :title="zone.title" :time="time" :tz="zone.tz" :counter="counter" />
     </template>
   </div>
-  <Credits>
+  <Credits bug-url="https://github.com/dotfortun/eve-timestamps/issues/new">
     <template v-slot:extra>
       <span v-if="diceroll">
         Yes, this is basically just Nakamura Labs' Time tool but with Discord
