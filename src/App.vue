@@ -7,7 +7,6 @@ import Time from "./components/Time.vue";
 import DiscordTS from "./components/DiscordTS.vue";
 import TimeSetter from "./components/TimeSetter.vue";
 
-import "dot-components/dist/style.css";
 import { Credits } from "dot-components";
 
 const timezones = ref([
