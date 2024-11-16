@@ -56,8 +56,8 @@ const selected = ref(formats.value[0]);
 <template>
   <div>
     <select class="text-slate-900" v-model="selected" v-once>
-      <template v-for="fmt of formats">
-        <option :value="fmt">{{ fmt.name }}</option>
+      <template v-for="format of formats">
+        <option :value="format">{{ format.name }}</option>
       </template>
     </select>
     <button
